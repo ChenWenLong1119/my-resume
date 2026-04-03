@@ -26,9 +26,9 @@ const resumes = [
     motivation: "愿意为基层医疗服务贡献力量，希望将专业知识应用于实践服务，通过实践完成调研数据整理与成果总结工作。"
   },
   {
-    id: "chenpeipei",
-    name: "陈焙培",
-    gradeMajor: "2024级 广东药科大学 口腔医学（本科在读）",
+    id: "chenyingpei",
+    name: "陈瑛培",
+    gradeMajor: "2024级 广东药科大学 口腔医学（本科大二在读）",
     photo: "images/chenyingpei.png",
     cardLabel: "口腔医学24级",
 
