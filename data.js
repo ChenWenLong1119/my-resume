@@ -8,7 +8,7 @@ const resumes = [
     phone: "13800000001",
     email: "huangwenru@example.com",
     gradeClass: "2024级口腔医学1班",
-    photo: "images/huangwenru.jpg",
+    photo: "images/huangwenru.png",
     cardLabel: "口腔医学24级",
     experienceText: "这里填写黄文如的个人经历。例如：曾担任班级干部，积极参加志愿活动，具备良好的沟通协作能力与组织能力。",
     skillsList: [
@@ -27,7 +27,7 @@ const resumes = [
     phone: "13794061269",
     email: "2185807772@qq.com",
     gradeClass: "2024级口腔医学班",
-    photo: "images/chenpeipei.jpg",
+    photo: "images/chenyingpei.png",
     cardLabel: "口腔医学24级",
     experienceText: "目前担任口腔医学24班体育委员，具备良好的沟通交流能力，工作能力和组织能力较强，积极参与志愿活动，有较强的奉献意识。",
     skillsList: [
