@@ -7,8 +7,8 @@
 body {
   font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
   color: #1f2d3d;
-  background: #f2f5f8;
-  line-height: 1.7;
+  background: #edf1f5;
+  line-height: 1.6;
 }
 
 a {
@@ -17,98 +17,107 @@ a {
 }
 
 .container {
-  width: 94%;
-  max-width: 1180px;
+  width: 85%;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 /* 顶部 */
 .site-header {
-  background: linear-gradient(135deg, #0d4d77, #1d79ad);
+  background: linear-gradient(90deg, #0d5a86 0%, #247db2 100%);
   color: #fff;
   text-align: center;
-  padding: 40px 20px 32px;
+  padding: 18px 20px 16px;
 }
 
 .site-header h1 {
-  font-size: 2.3rem;
-  margin-bottom: 10px;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
   letter-spacing: 1px;
 }
 
 .site-header .subtitle {
-  font-size: 1.05rem;
-  opacity: 0.95;
+  font-size: 1rem;
+  opacity: 0.96;
 }
 
 .site-footer {
   text-align: center;
-  color: #607080;
+  color: #6a7c8e;
   font-size: 0.95rem;
-  padding: 18px 12px 30px;
+  padding: 22px 12px 28px;
 }
 
-/* 首页卡片 */
+/* 首页卡片区域：高还原附件二 */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 24px;
-  padding: 36px 0 50px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 34px 42px;
+  padding: 34px 0 50px;
 }
 
 .profile-card {
-  background: #fff;
-  border: 1px solid #dbe5ee;
-  border-radius: 14px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1.05fr 1fr;
-  aspect-ratio: 4 / 3;
-  box-shadow: 0 8px 22px rgba(30, 60, 90, 0.08);
-  transition: all 0.25s ease;
+  display: block;
 }
 
-.profile-card:hover {
+.profile-card-inner {
+  background: #ffffff;
+  border: 2px solid #3b66c4;
+  border-radius: 40px;
+  min-height: 236px;
+  display: flex;
+  align-items: center;
+  padding: 18px 24px 18px 18px;
+  transition: all 0.2s ease;
+}
+
+.profile-card:hover .profile-card-inner {
   transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(30, 60, 90, 0.14);
+  box-shadow: 0 10px 24px rgba(59, 102, 196, 0.12);
 }
 
-.profile-photo {
-  background: #eef3f7;
+.profile-card-photo {
+  width: 165px;
+  min-width: 165px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  margin-right: 34px;
 }
 
-.profile-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+.profile-card-photo img {
+  width: 140px;
+  height: 182px;
+  object-fit: cover;
   display: block;
-  background: #eef3f7;
+  background: #fff;
 }
 
-.profile-summary {
-  padding: 20px 18px;
+.profile-card-text {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.profile-summary h2 {
-  font-size: 1.7rem;
-  color: #0b4d77;
-  margin-bottom: 14px;
-  line-height: 1.2;
+.profile-card-text h2 {
+  color: #1e78ad;
+  font-size: 3rem;
+  line-height: 1.05;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
-.profile-summary p {
-  color: #33475b;
-  font-size: 1rem;
+.profile-card-text p {
+  color: #000;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  font-weight: 800;
 }
 
-/* 详情页正式表格 */
+/* 详情页 */
 .resume-wrapper {
   margin: 30px auto 50px;
   background: #fff;
@@ -219,11 +228,57 @@ a {
   color: #16344d;
 }
 
-/* 响应式 */
-@media (max-width: 900px) {
-  .profile-card {
-    aspect-ratio: auto;
-    min-height: 220px;
+/* 平板适配 */
+@media (max-width: 1300px) {
+  .container {
+    width: 90%;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .profile-card-text h2 {
+    font-size: 2.6rem;
+  }
+}
+
+/* 手机适配 */
+@media (max-width: 768px) {
+  .site-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px 0 34px;
+  }
+
+  .profile-card-inner {
+    min-height: 180px;
+    border-radius: 26px;
+    padding: 16px;
+  }
+
+  .profile-card-photo {
+    width: 108px;
+    min-width: 108px;
+    margin-right: 16px;
+  }
+
+  .profile-card-photo img {
+    width: 92px;
+    height: 122px;
+  }
+
+  .profile-card-text h2 {
+    font-size: 1.9rem;
+    margin-bottom: 10px;
+  }
+
+  .profile-card-text p {
+    font-size: 1rem;
   }
 
   .resume-table,
@@ -249,27 +304,5 @@ a {
     height: 200px;
     margin: 0 auto;
     display: block;
-  }
-}
-
-@media (max-width: 640px) {
-  .site-header h1 {
-    font-size: 1.7rem;
-  }
-
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .profile-card {
-    grid-template-columns: 1fr;
-  }
-
-  .profile-photo {
-    min-height: 260px;
-  }
-
-  .profile-summary h2 {
-    font-size: 1.45rem;
   }
 }
