@@ -8,6 +8,24 @@ function escapeHtml(text) {
     .replace(/'/g, "&#39;");
 }
 
+function getShortLabel(person) {
+  if (person.cardLabel) return person.cardLabel;
+
+  const major = person.major || "口腔医学";
+  const gradeText = person.gradeClass || "";
+
+  const match = gradeText.match(/(\d{2}|\d{4})级/);
+  if (match) {
+    let grade = match[0];
+    if (grade.length === 6) {
+      grade = grade.slice(2);
+    }
+    return `${major}${grade}`;
+  }
+
+  return `${major}`;
+}
+
 function renderHomePage() {
   const cardGrid = document.getElementById("cardGrid");
   if (!cardGrid) return;
@@ -18,13 +36,15 @@ function renderHomePage() {
   }
 
   cardGrid.innerHTML = resumes.map(person => `
-    <a class="profile-card compact-card" href="resume.html?id=${encodeURIComponent(person.id)}">
-      <div class="compact-photo">
-        <img src="${escapeHtml(person.photo)}" alt="${escapeHtml(person.name)}">
-      </div>
-      <div class="compact-info">
-        <h2>${escapeHtml(person.name)}</h2>
-        <p>${escapeHtml(person.major)}${person.gradeClass ? " " + escapeHtml(person.gradeClass.match(/\d{2}级|\d{4}级|24级|25级|26级/)?.[0] || "") : ""}</p>
+    <a class="profile-card" href="resume.html?id=${encodeURIComponent(person.id)}">
+      <div class="profile-card-inner">
+        <div class="profile-card-photo">
+          <img src="${escapeHtml(person.photo)}" alt="${escapeHtml(person.name)}">
+        </div>
+        <div class="profile-card-text">
+          <h2>${escapeHtml(person.name)}</h2>
+          <p>${escapeHtml(getShortLabel(person))}</p>
+        </div>
       </div>
     </a>
   `).join("");
