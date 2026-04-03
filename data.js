@@ -3,7 +3,7 @@ const resumes = [
     id: "huangwenru",
     name: "黄文如",
     gradeMajor: "2024级 广东药科大学 口腔医学（本科大二在读）",
-    photo: "huangwenru.png",
+    photo: "images/huangwenru.png",
     cardLabel: "口腔医学24级",
 
     selfEvaluation: "专业实践能力良好，组织协调和团队协作能力强，吃苦耐劳，责任心强，服从组织安排，能适应长时间车程与基层实践环境，学习能力强，调研能力良好。",
