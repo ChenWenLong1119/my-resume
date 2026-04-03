@@ -8,31 +8,25 @@ function escapeHtml(text) {
     .replace(/'/g, "&#39;");
 }
 
+function renderPhoto(photo, name, className) {
+  if (photo && String(photo).trim()) {
+    return `<img src="${escapeHtml(photo)}" alt="${escapeHtml(name || "")}">`;
+  }
+  return `<div class="photo-placeholder">？</div>`;
+}
+
 function getShortLabel(person) {
   if (person.cardLabel && String(person.cardLabel).trim()) {
     return person.cardLabel;
   }
-
-  const major = person.major || "口腔医学";
-  const gradeText = person.gradeClass || "";
-
-  const match = gradeText.match(/(\d{2}|\d{4})级/);
-  if (match) {
-    let grade = match[0];
-    if (/^\d{4}级$/.test(grade)) {
-      grade = grade.slice(2);
-    }
-    return `${major}${grade}`;
-  }
-
-  return major;
+  return `${person.major || ""}${person.grade || ""}`;
 }
 
 function renderHomePage() {
   const cardGrid = document.getElementById("cardGrid");
   if (!cardGrid) return;
 
-  if (!Array.isArray(resumes)) {
+  if (typeof resumes === "undefined" || !Array.isArray(resumes)) {
     cardGrid.innerHTML = "<p>数据加载失败，请检查 data.js 文件。</p>";
     return;
   }
@@ -41,7 +35,7 @@ function renderHomePage() {
     <a class="profile-card" href="resume.html?id=${encodeURIComponent(person.id)}">
       <div class="profile-card-inner">
         <div class="profile-card-photo">
-          <img src="${escapeHtml(person.photo)}" alt="${escapeHtml(person.name)}">
+          ${renderPhoto(person.photo, person.name)}
         </div>
         <div class="profile-card-text">
           <h2>${escapeHtml(person.name)}</h2>
@@ -53,6 +47,7 @@ function renderHomePage() {
 }
 
 function getResumeById(id) {
+  if (typeof resumes === "undefined" || !Array.isArray(resumes)) return null;
   return resumes.find(item => item.id === id);
 }
 
@@ -91,12 +86,14 @@ function renderDetailPage() {
 
       <table class="resume-table">
         <tr>
-          <th>姓名</th>
-          <td>${escapeHtml(person.name || "")}</td>
-          <th>性别</th>
-          <td>${escapeHtml(person.gender || "")}</td>
+          <th style="width: 12%;">姓名</th>
+          <td style="width: 18%;">${escapeHtml(person.name || "")}</td>
+          <th style="width: 12%;">性别</th>
+          <td style="width: 26%;">${escapeHtml(person.gender || "")}</td>
           <td class="resume-photo-cell" rowspan="3">
-            <img src="${escapeHtml(person.photo)}" alt="${escapeHtml(person.name)}">
+            <div class="resume-photo-box">
+              ${renderPhoto(person.photo, person.name)}
+            </div>
           </td>
         </tr>
         <tr>
@@ -116,13 +113,13 @@ function renderDetailPage() {
           <td colspan="4">${escapeHtml(person.gradeClass || "")}</td>
         </tr>
         <tr>
-          <th class="section-label" colspan="5">个人经历 / 个人优势</th>
+          <th class="section-title" colspan="5">个人经历</th>
         </tr>
         <tr>
           <td class="long-text" colspan="5">${escapeHtml(person.experienceText || "")}</td>
         </tr>
         <tr>
-          <th class="section-label" colspan="5">个人特长</th>
+          <th class="section-title" colspan="5">个人特长</th>
         </tr>
         <tr>
           <td class="list-content" colspan="5">
@@ -130,15 +127,7 @@ function renderDetailPage() {
           </td>
         </tr>
         <tr>
-          <th class="section-label" colspan="5">相关经历</th>
-        </tr>
-        <tr>
-          <td class="list-content" colspan="5">
-            ${renderList(person.relatedExperienceList, false)}
-          </td>
-        </tr>
-        <tr>
-          <th class="section-label" colspan="5">个人评价 / 参与动机</th>
+          <th class="section-title" colspan="5">个人评价</th>
         </tr>
         <tr>
           <td class="long-text" colspan="5">${escapeHtml(person.evaluationText || "")}</td>
