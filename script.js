@@ -9,7 +9,9 @@ function escapeHtml(text) {
 }
 
 function getShortLabel(person) {
-  if (person.cardLabel) return person.cardLabel;
+  if (person.cardLabel && String(person.cardLabel).trim()) {
+    return person.cardLabel;
+  }
 
   const major = person.major || "口腔医学";
   const gradeText = person.gradeClass || "";
@@ -17,13 +19,13 @@ function getShortLabel(person) {
   const match = gradeText.match(/(\d{2}|\d{4})级/);
   if (match) {
     let grade = match[0];
-    if (grade.length === 6) {
+    if (/^\d{4}级$/.test(grade)) {
       grade = grade.slice(2);
     }
     return `${major}${grade}`;
   }
 
-  return `${major}`;
+  return major;
 }
 
 function renderHomePage() {
