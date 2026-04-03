@@ -12,14 +12,19 @@ function renderHomePage() {
   const cardGrid = document.getElementById("cardGrid");
   if (!cardGrid) return;
 
+  if (!Array.isArray(resumes)) {
+    cardGrid.innerHTML = "<p>数据加载失败，请检查 data.js 文件。</p>";
+    return;
+  }
+
   cardGrid.innerHTML = resumes.map(person => `
-    <a class="profile-card" href="resume.html?id=${encodeURIComponent(person.id)}">
-      <div class="profile-photo">
+    <a class="profile-card compact-card" href="resume.html?id=${encodeURIComponent(person.id)}">
+      <div class="compact-photo">
         <img src="${escapeHtml(person.photo)}" alt="${escapeHtml(person.name)}">
       </div>
-      <div class="profile-summary">
+      <div class="compact-info">
         <h2>${escapeHtml(person.name)}</h2>
-        <p>${escapeHtml(person.gradeClass)}</p>
+        <p>${escapeHtml(person.major)}${person.gradeClass ? " " + escapeHtml(person.gradeClass.match(/\d{2}级|\d{4}级|24级|25级|26级/)?.[0] || "") : ""}</p>
       </div>
     </a>
   `).join("");
